@@ -34,7 +34,7 @@ public class EjercicioTresYCuatro {
         // Crear una instancia de la clase Turno para gestionar la cola de clientes
         Turno turno = new Turno();
         String opcion;
-        short opcionesDeNavegacion = 0;
+        short opcionesDeNavegacion = -1;
 
         
             // Ciclo principal del menú de opciones
@@ -48,6 +48,12 @@ public class EjercicioTresYCuatro {
                                                                                   4. Marcar como 'atendido'
                                                                                   0. Salir
                                                                                   Ingrese su opción: """));
+                    if (opcionesDeNavegacion >= 2  && opcionesDeNavegacion <= 4){
+                            if (turno.getListaDeClientes() == null){
+                                System.out.println("No hay personas en la cola.");
+                                opcionesDeNavegacion = -1;
+                            }                            
+                    }
                 }while(opcionesDeNavegacion < 0 || opcionesDeNavegacion > 4); 
                 
                 switch (opcionesDeNavegacion) {
@@ -70,34 +76,23 @@ public class EjercicioTresYCuatro {
                         } while (opcion != null && opcion.equals(""));
                         break;
                     case 2:
-                        // Opción para consultar la lista de clientes en cola
-                        if (turno.getListaDeClientes() == null){
-                            System.out.println("No hay personas en la cola.");
-                        }else{
-                            System.out.println("Lista de las personas en cola: ");
-                            System.out.println(turno.getListaDeClientes());                         
-                        }                
+                        // Opción para consultar la lista de clientes en cola                  
+                        System.out.println("Lista de las personas en cola: ");
+                        System.out.println(turno.getListaDeClientes());                                                                
                         break;
                     case 3:
                         // Opción para consultar el primer cliente en cola
                         Cliente primerCliente = turno.consultarPrimerCliente();
-                        if (primerCliente != null) {
-                            System.out.println("El primer cliente en cola es: ");
-                            System.out.println(primerCliente.toString2());
-                        } else {
-                            System.out.println("No hay clientes en la cola.");
-                        }
+                        System.out.println("El primer cliente en cola es: ");
+                        System.out.println(primerCliente.toString2());
                         break;
                     case 4:
                         // Opción para marcar como atendido al primer cliente en cola
-                        if (turno.getListaDeClientes() == null){
-                            System.out.println("No hay personas en la cola.");
-                        }else{
-                            System.out.println("El cliente: "+ turno.consultarPrimerCliente().toString2() +", ha sido atendido y removido de la cola: " );
-                            turno.marcarComoAtendido(); 
-                            System.out.println("Lista de turnos actualizada: ");
-                            System.out.println(turno.getListaDeClientes());
-                        }
+                        System.out.println("El cliente: "+ turno.consultarPrimerCliente().toString2() +", ha sido atendido y removido de la cola: " );
+                        turno.marcarComoAtendido(); 
+                        System.out.println("Lista de turnos actualizada: ");
+                        System.out.println(turno.getListaDeClientes());
+                        
                         break;
                     case 0:
                         // Opción para salir del programa
@@ -113,7 +108,7 @@ public class EjercicioTresYCuatro {
             System.out.println("Se ha generado un error: " + e.getMessage());
             System.out.println("Se ha generado un error: " + e.getCause());
                 }
-        } while (opcionesDeNavegacion != 0);
+        } while (opcionesDeNavegacion != 0 );
 
         // Mostrar la lista de clientes en cola al finalizar el programa
         System.out.println("Lista final de las personas en cola: ");
