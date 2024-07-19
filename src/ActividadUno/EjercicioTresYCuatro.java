@@ -34,11 +34,12 @@ public class EjercicioTresYCuatro {
         // Crear una instancia de la clase Turno para gestionar la cola de clientes
         Turno turno = new Turno();
         String opcion;
-        short opcionesDeNavegacion;
+        short opcionesDeNavegacion = 0;
 
-        try {
+        
             // Ciclo principal del menú de opciones
-            do {
+        do {
+            try {
                 do{
                     opcionesDeNavegacion = Short.parseShort(JOptionPane.showInputDialog("""
                                                                                   1. Crear nuevo turno
@@ -47,7 +48,8 @@ public class EjercicioTresYCuatro {
                                                                                   4. Marcar como 'atendido'
                                                                                   0. Salir
                                                                                   Ingrese su opción: """));
-                }while(opcionesDeNavegacion < 0 || opcionesDeNavegacion > 4);              
+                }while(opcionesDeNavegacion < 0 || opcionesDeNavegacion > 4); 
+                
                 switch (opcionesDeNavegacion) {
                     case 1:
                         // Opción para agregar nuevos clientes a la cola
@@ -55,7 +57,7 @@ public class EjercicioTresYCuatro {
                             String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del cliente:", "Nombre", JOptionPane.QUESTION_MESSAGE);
                             if (nombre == null || nombre.trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
-                            } else {
+                            } else if (nombre != null){
                                 Cliente cliente = new Cliente(nombre);
                                 turno.agregarCliente(cliente);
                                 System.out.println("Lista de turnos actualizada: ");
@@ -88,10 +90,14 @@ public class EjercicioTresYCuatro {
                         break;
                     case 4:
                         // Opción para marcar como atendido al primer cliente en cola
-                        turno.marcarComoAtendido();
-                        System.out.println("El primer cliente ha sido atendido y removido de la cola.");
-                        System.out.println("Lista de turnos actualizada: ");
-                        System.out.println(turno.getListaDeClientes());
+                        if (turno.getListaDeClientes() == null){
+                            System.out.println("No hay personas en la cola.");
+                        }else{
+                            System.out.println("El cliente: "+ turno.consultarPrimerCliente().toString2() +", ha sido atendido y removido de la cola: " );
+                            turno.marcarComoAtendido(); 
+                            System.out.println("Lista de turnos actualizada: ");
+                            System.out.println(turno.getListaDeClientes());
+                        }
                         break;
                     case 0:
                         // Opción para salir del programa
@@ -102,15 +108,15 @@ public class EjercicioTresYCuatro {
                         JOptionPane.showMessageDialog(null, "Opción no válida. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
                         break;
                 }
-            } while (opcionesDeNavegacion != 0);
-
-            // Mostrar la lista de clientes en cola al finalizar el programa
-            System.out.println("Lista final de las personas en cola: ");
-            System.out.println(turno.getListaDeClientes());
-        } catch (Exception e) {
+                } catch (Exception e) {
             // Manejo de excepciones y mensajes de error
             System.out.println("Se ha generado un error: " + e.getMessage());
             System.out.println("Se ha generado un error: " + e.getCause());
-        }
+                }
+        } while (opcionesDeNavegacion != 0);
+
+        // Mostrar la lista de clientes en cola al finalizar el programa
+        System.out.println("Lista final de las personas en cola: ");
+        System.out.println(turno.getListaDeClientes());       
     }
 }
