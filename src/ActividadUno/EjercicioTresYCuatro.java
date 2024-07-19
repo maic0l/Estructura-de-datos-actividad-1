@@ -69,8 +69,12 @@ public class EjercicioTresYCuatro {
                         break;
                     case 2:
                         // Opción para consultar la lista de clientes en cola
-                        System.out.println("Lista de las personas en cola: ");
-                        System.out.println(turno.getListaDeClientes());
+                        if (turno.getListaDeClientes() == null){
+                            System.out.println("No hay personas en la cola.");
+                        }else{
+                            System.out.println("Lista de las personas en cola: ");
+                            System.out.println(turno.getListaDeClientes());                         
+                        }                
                         break;
                     case 3:
                         // Opción para consultar el primer cliente en cola
@@ -101,7 +105,7 @@ public class EjercicioTresYCuatro {
             } while (opcionesDeNavegacion != 0);
 
             // Mostrar la lista de clientes en cola al finalizar el programa
-            System.out.println("Lista de las personas en cola: ");
+            System.out.println("Lista final de las personas en cola: ");
             System.out.println(turno.getListaDeClientes());
         } catch (Exception e) {
             // Manejo de excepciones y mensajes de error

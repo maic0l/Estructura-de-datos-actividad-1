@@ -8,7 +8,8 @@ public class Turno {
     public Turno() {
         listaDeClientes = new LinkedList<>();
     }
-
+    
+    
     public void agregarCliente(Cliente cliente) {
         listaDeClientes.add(cliente);
     }
@@ -16,13 +17,15 @@ public class Turno {
     public String getListaDeClientes() {
         int numeroDeTurnos = 0;
         StringBuilder listaDeClientesConTurnos = new StringBuilder();
-
-        for (Cliente c : listaDeClientes) {
-            numeroDeTurnos++;
-            listaDeClientesConTurnos.append("Turno N° ").append(numeroDeTurnos).append(". ").append(c.toString2()).append("\n");
-        }
-
+        if (listaDeClientes.isEmpty()) {
+            return null;
+        }else{
+            for (Cliente c : listaDeClientes) {
+                numeroDeTurnos++;
+                listaDeClientesConTurnos.append("Turno N° ").append(numeroDeTurnos).append(". ").append(c.toString2()).append("\n");         
+            }
         return listaDeClientesConTurnos.toString();
+        }     
     }
 
     public Cliente consultarPrimerCliente() {
