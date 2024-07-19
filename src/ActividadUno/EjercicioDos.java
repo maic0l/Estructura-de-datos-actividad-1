@@ -11,7 +11,7 @@ public class EjercicioDos {
      * Diseñe y codifique un programa, aplicando el concepto LIFO, que le 
      * permita recibir una cadena de caracteres e invierta el orden de ingreso 
      * de estos. Por ejemplo: Se ingresa la cadena “solucionando un problema” 
-     * y debe retornar “amelborp unodnanoiculos”.
+     * y debe retornar “amelborp un odnanoiculos”.
      */
     public static void main(String[] args) {
         // Declaración de variable para almacenar la cadena de texto ingresada
